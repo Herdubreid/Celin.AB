@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<u:UraniumContentPage x:Class="Celin.AB.Views.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:u="clr-namespace:UraniumUI.Pages;assembly=UraniumUI"
+             xmlns:m="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:local="clr-namespace:Celin.AB">
+
+    <VerticalStackLayout>
+
+        <m:AutoCompleteTextField x:Name="customer"
+                                 Title="Enter Customer..."
+                                 TextChanged="customer_TextChanged"/>
+
+        <m:ButtonView HorizontalOptions="Center" >
+            <Label Text="☢️ Hello, Uranium!" />
+        </m:ButtonView>
+
+    </VerticalStackLayout>
+</u:UraniumContentPage>

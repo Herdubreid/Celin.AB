@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<uranium:UraniumContentPage x:Class="Celin.AB.Views.AboutPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:uranium="clr-namespace:UraniumUI.Pages;assembly=UraniumUI"
+             xmlns:celin="clr-namespace:Celin"
+             x:DataType="celin:Host"
+             xmlns:local="clr-namespace:Celin.AB.Views">
+
+    <StackLayout HorizontalOptions="CenterAndExpand"
+                 Margin="40">
+
+        <input:FormView Spacing="10"
+                        WidthRequest="200"
+                        SubmitCommand="{Binding Authenticate}">
+
+            <material:TextField Title="Username"
+                                Text="{Binding AuthRequest.username}">
+                <validation:RequiredValidation />
+            </material:TextField>
+
+            <material:TextField Title="Password"
+                                IsPassword="true"
+                                Text="{Binding AuthRequest.password}">
+                <validation:RequiredValidation />
+            </material:TextField>
+            
+            <Button StyleClass="FilledButton"
+                    Text="Login"
+                    input:FormView.IsSubmitButton="True" />
+
+        </input:FormView>
+
+    </StackLayout>
+
+</uranium:UraniumContentPage>
