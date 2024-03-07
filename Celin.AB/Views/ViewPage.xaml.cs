@@ -2,7 +2,7 @@
 
 public partial class ViewPage : UraniumUI.Pages.UraniumContentPage
 {
-    public ViewPage()
+    public ViewPage(W01012B.Row? row)
     {
         InitializeComponent();
     }

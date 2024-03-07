@@ -15,8 +15,15 @@ public partial class App : Application
         {
             if (e.PropertyName == nameof(host.IsAuthenticated))
             {
-                MainPage = host.IsAuthenticated
-                ? shell : about;
+                if (host.IsAuthenticated)
+                {
+                    MainPage = shell;
+                    shell.GoToAsync("main");
+                }
+                else
+                {
+                    MainPage = about;
+                }
             }
         };
     }

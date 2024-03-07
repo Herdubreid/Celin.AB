@@ -1,21 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<u:UraniumContentPage x:Class="Celin.AB.Views.MainPage"
+<uranium:UraniumContentPage x:Class="Celin.AB.Views.MainPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:u="clr-namespace:UraniumUI.Pages;assembly=UraniumUI"
-             xmlns:m="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             xmlns:local="clr-namespace:Celin.AB">
+             xmlns:uranium="clr-namespace:UraniumUI.Pages;assembly=UraniumUI"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:celin="clr-namespace:Celin"
+             xmlns:w01012b="clr-namespace:Celin.W01012B"
+             x:DataType="celin:SearchAndSelect">
 
-    <VerticalStackLayout>
+    <Grid>
 
-        <m:AutoCompleteTextField x:Name="customer"
-                                 Title="Enter Customer..."
-                                 TextChanged="customer_TextChanged"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <m:ButtonView HorizontalOptions="Center" >
-            <Label Text="☢️ Hello, Uranium!" />
-        </m:ButtonView>
+        <SearchBar Placeholder="Search..."
+                   Grid.Row="0">
+            <SearchBar.Behaviors>
+                <toolkit:UserStoppedTypingBehavior
+                    Command="{Binding CustomerSearch}"
+                    StoppedTypingTimeThreshold="1000"
+                    MinimumLengthThreshold="1"/>
+            </SearchBar.Behaviors>
+        </SearchBar>
 
-    </VerticalStackLayout>
-</u:UraniumContentPage>
+        <ScrollView Grid.Row="1">
+
+            <ListView ItemsSource="{Binding Rows}"
+                      SelectionMode="Single"
+                      ItemSelected="ABSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="w01012b:Row">
+                        <ViewCell>
+                            <Grid StyleClass="OutlinedButton"
+                                  Padding="20,10,20,10"
+                                  ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding z_AN8_19}"
+                                       HorizontalTextAlignment="End"/>
+                                <Label Text="{Binding z_ALPH_20}"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding z_AT1_50}"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="2"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </ScrollView>
+
+    </Grid>
+</uranium:UraniumContentPage>

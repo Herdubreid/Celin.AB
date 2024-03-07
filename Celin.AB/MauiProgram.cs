@@ -42,7 +42,9 @@ namespace Celin.AB
                 .AddCommunityToolkitDialogs()
                 .AddSingleton<Host>()
                 .AddSingleton<AppShell>()
-                .AddSingleton<AboutPage>();
+                .AddSingleton<MainPage>()
+                .AddSingleton<AboutPage>()
+                .AddTransient<SearchAndSelect>();
 
             /* Logger */
             var loggingSection = config.GetSection("Logging");

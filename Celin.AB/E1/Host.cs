@@ -19,6 +19,7 @@ public class Host : AIS.Server, INotifyPropertyChanged
         }
     }
     public ICommand Authenticate { get; private set; }
+    public ICommand Logout { get; private set; }
     public event PropertyChangedEventHandler? PropertyChanged;
     void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -32,6 +33,7 @@ public class Host : AIS.Server, INotifyPropertyChanged
                 {
                     await AuthenticateAsync();
                     IsAuthenticated = true;
+                    OnPropertyChanged(nameof(AuthResponse));
                 }
                 catch (Exception ex)
                 {
@@ -39,5 +41,17 @@ public class Host : AIS.Server, INotifyPropertyChanged
                 }
             },
             canExecute: () => !IsAuthenticated);
+        Logout = new Command(
+            async execute =>
+            {
+                try
+                {
+                    await LogoutAsync();
+                    IsAuthenticated = false;
+                    OnPropertyChanged(nameof(AuthResponse));
+                }
+                catch { }
+            },
+            canExecute => IsAuthenticated);
     }
 }

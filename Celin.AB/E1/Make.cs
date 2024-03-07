@@ -36,6 +36,14 @@ public class Make
             @operator = AIS.Condition.EQUAL,
             value = List(Literal(value))
         };
+    // Like condition
+    public static AIS.Condition Like(string controlId, string value)
+        => new AIS.Condition
+        {
+            controlId = controlId,
+            @operator = AIS.Condition.STR_CONTAIN,
+            value = List(Literal(value))
+        };
     // In condition
     public static AIS.Condition In(string controlId, string[] values)
         => new AIS.Condition

@@ -11,10 +11,20 @@
              x:DataType="celin:Host"
              xmlns:local="clr-namespace:Celin.AB.Views">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout HorizontalOptions="CenterAndExpand"
-                 Margin="40">
+                 Margin="40"
+                 Spacing="10">
+
+        <Label Text="{Binding AuthResponse.userInfo.alphaName, Mode=OneWay}" />
 
         <input:FormView Spacing="10"
+                        IsVisible="{Binding IsAuthenticated, Converter={StaticResource InvertedBoolConverter}}"
                         WidthRequest="200"
                         SubmitCommand="{Binding Authenticate}">
 
@@ -29,11 +39,16 @@
                 <validation:RequiredValidation />
             </material:TextField>
             
-            <Button StyleClass="FilledButton"
+            <Button StyleClass="OutlinedButton"
                     Text="Login"
                     input:FormView.IsSubmitButton="True" />
 
         </input:FormView>
+
+        <Button StyleClass="OutlineButton"
+                Text="Logout"
+                IsVisible="{Binding IsAuthenticated}"
+                Command="{Binding Logout}" />
 
     </StackLayout>
 

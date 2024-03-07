@@ -1,16 +1,23 @@
-﻿using InputKit.Shared.Controls;
+﻿using System.Diagnostics;
 using UraniumUI.Pages;
 
 namespace Celin.AB.Views;
 
 public partial class MainPage : UraniumContentPage
 {
-    private void customer_TextChanged(object sender, TextChangedEventArgs e)
+    private void ABSelected(object sender, SelectedItemChangedEventArgs e)
     {
+        Debug.WriteLine(e);
+
+        _shell.GoToView(e.SelectedItem as W01012B.Row);
     }
-    public MainPage()
+    readonly AppShell _shell;
+    public MainPage(AppShell shell, SearchAndSelect searchAndSelect)
     {
         InitializeComponent();
+
+        _shell = shell;
+        BindingContext = searchAndSelect;
     }
 
 }
